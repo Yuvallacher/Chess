@@ -16,9 +16,4 @@ public class Pawn implements Piece {
     public void move(Spot target) {
 
     }
-
-    @Override
-    public void take() {
-
-    }
 }
