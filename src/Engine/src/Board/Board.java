@@ -12,13 +12,13 @@ public class Board {
     public Board() {
         this.board = new ArrayList<>(NUM_OF_ROWS);
         for (int i = 0; i < NUM_OF_ROWS; i++) {
-            this.board.add(new ArrayList<>(8));
+            this.board.add(new ArrayList<>(NUM_OF_ROWS));
             if (i <= 1)
-                this.board.get(i).addAll(Collections.nCopies(8, PieceColor.WHITE));
+                this.board.get(i).addAll(Collections.nCopies(NUM_OF_ROWS, PieceColor.WHITE));
             else if (i > 1 && i <= 5)
-                this.board.get(i).addAll(Collections.nCopies(8, PieceColor.EMPTY));
+                this.board.get(i).addAll(Collections.nCopies(NUM_OF_ROWS, null));
             else
-                this.board.get(i).addAll(Collections.nCopies(8, PieceColor.BLACK));
+                this.board.get(i).addAll(Collections.nCopies(NUM_OF_ROWS, PieceColor.BLACK));
         }
     }
 
@@ -40,5 +40,18 @@ public class Board {
         System.out.print("\t");
         for (int i = 0 ; i < NUM_OF_ROWS ; i++)
             System.out.print(String.valueOf("  " + (char)('A'+i)) + "    \t");
+    }
+
+    public List<List<PieceColor>> getBoardCopy() {
+        List<List<PieceColor>> copy = new ArrayList<>(NUM_OF_ROWS);
+        int i = 0;
+        for (List<PieceColor> row : board) {
+            copy.add(new ArrayList<>(NUM_OF_ROWS));
+            for (PieceColor color : row) {
+                copy.get(i).add(color);
+            }
+            i++;
+        }
+        return copy;
     }
 }

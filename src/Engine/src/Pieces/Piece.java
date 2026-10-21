@@ -1,7 +1,10 @@
 package Pieces;
+import Board.PieceColor;
 import Board.Spot;
 
+import java.util.List;
+
 public interface Piece {
-    public Spot[] get_valid_spots();
+    public List<Spot> getValidSpots(List<List<PieceColor>> board);
     public void move(Spot target);
 }

@@ -1,9 +1,12 @@
 package Board;
 
 public class Spot {
-    public Spot(int i_row, int i_column) {
-        int row = i_row;
-        int column = i_column;
+    private int row;
+    private int column;
+
+    public Spot(int row, int column) {
+        this.row = row;
+        this.column = column;
     }
 
     public Spot(String position) {
@@ -15,8 +18,16 @@ public class Spot {
             if (!Character.isLetter(letter) || !Character.isDigit(digit)) {
                 throw new IllegalArgumentException("String position must be of format <Letter><Digit>, for example D4");
             }
-            int row = Character.getNumericValue(letter);
-            int column = Character.getNumericValue(digit);
+            this.row = Character.getNumericValue(letter);
+            this.column = Character.getNumericValue(digit);
         }
+    }
+
+    public int getRow() { return this.row; }
+    public int getColumn() { return this.column; }
+
+    public void updateSpot(Spot new_spot) {
+        this.row = new_spot.getRow();
+        this.column = new_spot.getColumn();
     }
 }
