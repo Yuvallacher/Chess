@@ -1,12 +1,16 @@
 package Board;
 
+import Pieces.Pawn;
+import Pieces.Piece;
+import Pieces.PieceColor;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 
 public class Board {
-    private final List<List<PieceColor>> board;
+    private final List<List<Piece>> board;
     private static final int NUM_OF_ROWS = 8;
 
     public Board() {
@@ -14,11 +18,13 @@ public class Board {
         for (int i = 0; i < NUM_OF_ROWS; i++) {
             this.board.add(new ArrayList<>(NUM_OF_ROWS));
             if (i <= 1)
-                this.board.get(i).addAll(Collections.nCopies(NUM_OF_ROWS, PieceColor.WHITE));
-            else if (i > 1 && i <= 5)
+                for (int j = 0; j < NUM_OF_ROWS; j++)
+                    this.board.get(i).add(new Pawn(new Spot(i, j), PieceColor.WHITE));
+            else if (i <= 5)
                 this.board.get(i).addAll(Collections.nCopies(NUM_OF_ROWS, null));
             else
-                this.board.get(i).addAll(Collections.nCopies(NUM_OF_ROWS, PieceColor.BLACK));
+                for (int j = 0; j < NUM_OF_ROWS; j++)
+                    this.board.get(i).add(new Pawn(new Spot(i, j), PieceColor.BLACK));
         }
     }
 
@@ -26,11 +32,10 @@ public class Board {
         this.print_letters();
         System.out.println("\n");
         for (int i = NUM_OF_ROWS-1 ; i >= 0 ; i--) {
-            System.out.print(i + 1 + "\t");
-            for (int j = NUM_OF_ROWS-1 ; j >= 0 ; j--) {
-                System.out.print(this.board.get(i).get(j) + "\t");
-            }
-            System.out.print(i + 1);
+            System.out.print(i + 1 + "\t\t");
+            for (int j = NUM_OF_ROWS-1 ; j >= 0 ; j--)
+                System.out.printf("%-12s", this.board.get(i).get(j));
+            System.out.print("\t" + (int)(i + 1));
             System.out.println("\n");
         }
         this.print_letters();
@@ -39,19 +44,19 @@ public class Board {
     private void print_letters() {
         System.out.print("\t");
         for (int i = 0 ; i < NUM_OF_ROWS ; i++)
-            System.out.print(String.valueOf("  " + (char)('A'+i)) + "    \t");
+            System.out.printf("    %-8s", (char)('A'+i));
     }
 
-    public List<List<PieceColor>> getBoardCopy() {
-        List<List<PieceColor>> copy = new ArrayList<>(NUM_OF_ROWS);
-        int i = 0;
-        for (List<PieceColor> row : board) {
-            copy.add(new ArrayList<>(NUM_OF_ROWS));
-            for (PieceColor color : row) {
-                copy.get(i).add(color);
-            }
-            i++;
-        }
-        return copy;
-    }
+//    public List<List<Piece>> getBoardCopy() {
+//        List<List<PieceColor>> copy = new ArrayList<>(NUM_OF_ROWS);
+//        int i = 0;
+//        for (List<Optional<Piece>> row : board) {
+//            copy.add(new ArrayList<>(NUM_OF_ROWS));
+//            for (PieceColor color : row) {
+//                copy.get(i).add(color);
+//            }
+//            i++;
+//        }
+//        return copy;
+//    }
 }

@@ -1,4 +1,4 @@
-package Board;
+package Pieces;
 
 public enum PieceColor {
     WHITE,  // White piece

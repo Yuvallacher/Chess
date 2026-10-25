@@ -1,7 +1,6 @@
 package Pieces;
 
 import Board.Spot;
-import Board.PieceColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,5 +56,12 @@ public class Pawn implements Piece {
     @Override
     public void move(Spot target) {
 
+    }
+
+    public PieceColor getColor() { return color; }
+
+    @Override
+    public String toString() {
+        return this.color.toString().toLowerCase() + " Pawn";
     }
 }
