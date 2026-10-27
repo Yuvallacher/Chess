@@ -1,15 +1,15 @@
 package Board;
 
-public class Spot {
+public class Position {
     private int row;
     private int column;
 
-    public Spot(int row, int column) {
+    public Position(int row, int column) {
         this.row = row;
         this.column = column;
     }
 
-    public Spot(String position) {
+    public Position(String position) {
         if (position.length() != 2) {
             throw new IllegalArgumentException("String position must have 2 characters!");
         } else {
@@ -26,8 +26,17 @@ public class Spot {
     public int getRow() { return this.row; }
     public int getColumn() { return this.column; }
 
-    public void updateSpot(Spot new_spot) {
-        this.row = new_spot.getRow();
-        this.column = new_spot.getColumn();
+    public void updatePosition(Position new_position) {
+        this.row = new_position.getRow();
+        this.column = new_position.getColumn();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other)
+            return true;
+        if (!(other instanceof Position other_as_position))
+            return false;
+        return this.row == other_as_position.row && this.column == other_as_position.column;
     }
 }

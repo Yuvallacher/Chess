@@ -1,10 +1,12 @@
 package Pieces;
-import Board.Spot;
+import Board.Position;
 
 import java.util.List;
 
 public interface Piece {
-    public List<Spot> getValidSpots(List<List<PieceColor>> board);
-    public void move(Spot target);
+    public List<Position> getValidPositions(List<List<Piece>> board);
+    public boolean[] move(List<List<Piece>> board, Position target);
     public PieceColor getColor();
+    public void setAsTaken();
+    public boolean isTaken();
 }

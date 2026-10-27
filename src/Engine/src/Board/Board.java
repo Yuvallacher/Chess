@@ -19,12 +19,12 @@ public class Board {
             this.board.add(new ArrayList<>(NUM_OF_ROWS));
             if (i <= 1)
                 for (int j = 0; j < NUM_OF_ROWS; j++)
-                    this.board.get(i).add(new Pawn(new Spot(i, j), PieceColor.WHITE));
+                    this.board.get(i).add(new Pawn(new Position(i, j), PieceColor.WHITE));
             else if (i <= 5)
                 this.board.get(i).addAll(Collections.nCopies(NUM_OF_ROWS, null));
             else
                 for (int j = 0; j < NUM_OF_ROWS; j++)
-                    this.board.get(i).add(new Pawn(new Spot(i, j), PieceColor.BLACK));
+                    this.board.get(i).add(new Pawn(new Position(i, j), PieceColor.BLACK));
         }
     }
 
