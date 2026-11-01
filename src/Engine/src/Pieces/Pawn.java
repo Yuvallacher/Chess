@@ -9,6 +9,7 @@ public class Pawn extends AbstPiece {
 
     public Pawn(Position position, PieceColor color) {
         super(position, color);
+        this.points_value = 1;
     }
 
     @Override

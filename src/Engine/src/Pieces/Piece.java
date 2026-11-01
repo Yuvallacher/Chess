@@ -9,4 +9,5 @@ public interface Piece {
     public PieceColor getColor();
     public void setAsTaken();
     public boolean isTaken();
+    public Integer getPoints_value();
 }

@@ -10,6 +10,7 @@ public abstract class AbstPiece implements Piece{
     protected Position position;
     protected boolean is_taken;
     protected Boolean is_pinned;
+    protected Integer points_value;
     protected List<Position> valid_positions;
 
     public AbstPiece(Position position, PieceColor color) {
@@ -50,4 +51,7 @@ public abstract class AbstPiece implements Piece{
     public void setPosition(Position position) { this.position = position; }
 
     public List<Position> getValid_positions() { return this.valid_positions; }
+
+    @Override
+    public Integer getPoints_value() { return points_value; }
 }
