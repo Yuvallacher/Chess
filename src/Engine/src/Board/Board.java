@@ -37,14 +37,20 @@ public class Board {
         }
     }
 
+    //TODO - fix this shit
     public void print_board() {
         this.print_letters();
         System.out.println("\n");
         for (int i = NUM_OF_ROWS - 1; i >= 0; i--) {
-            System.out.print(i + 1 + "\t\t");
-            for (int j = NUM_OF_ROWS - 1; j >= 0; j--)
-                System.out.printf("%-12s", this.board.get(i).get(j));
-            System.out.print("\t" + (int) (i + 1));
+            System.out.print(i + 1 + "\t");
+            for (int j = NUM_OF_ROWS - 1; j >= 0; j--) {
+                Piece piece = this.board.get(i).get(j);
+                if (piece != null && !piece.isTaken())
+                    System.out.printf("  " + "%-3s", piece);
+                else
+                    System.out.print("     ");
+            }
+            System.out.print("\t" + (i + 1));
             System.out.println("\n");
         }
         this.print_letters();
@@ -53,6 +59,6 @@ public class Board {
     private void print_letters() {
         System.out.print("\t");
         for (int i = 0; i < NUM_OF_ROWS; i++)
-            System.out.printf("    %-8s", (char) ('A' + i));
+            System.out.printf("  " + "%-3s", (char) ('A' + i));
     }
 }

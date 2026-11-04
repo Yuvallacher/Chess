@@ -38,6 +38,25 @@ public abstract class AbstPiece implements Piece{
         return this.is_taken;
     }
 
+    @Override
+    public boolean[] move(List<List<Piece>> board, Position target) {
+        boolean valid_move = false;
+        boolean took_piece = false;
+        for (Position valid_position : this.valid_positions) {
+            if (valid_position.equals(target)) {
+                valid_move = true;
+                Piece piece_at_target = board.get(target.getRow()).get(target.getColumn());
+                if (piece_at_target != null && !piece_at_target.isTaken()) {
+                    piece_at_target.setAsTaken();
+                    took_piece = true;
+                }
+                this.position.updatePosition(target);
+                break;
+            }
+        }
+        return new boolean[] {valid_move, took_piece};
+    }
+
     public boolean getIs_taken() { return is_taken; }
 
     public void setIs_taken() { this.is_taken = true; }
@@ -49,6 +68,10 @@ public abstract class AbstPiece implements Piece{
     public Position getPosition() { return position; }
 
     public void setPosition(Position position) { this.position = position; }
+
+    public int getRow() { return this.position.getRow(); }
+
+    public int getColumn() { return this.position.getColumn(); }
 
     public List<Position> getValid_positions() { return this.valid_positions; }
 
