@@ -5,7 +5,7 @@ import Board.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pawn extends AbstPiece {
+public class Pawn extends AbstChessman {
 
     public Pawn(Position position, PieceColor color) {
         super(position, color);

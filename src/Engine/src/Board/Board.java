@@ -3,6 +3,7 @@ package Board;
 import Pieces.Pawn;
 import Pieces.Piece;
 import Pieces.PieceColor;
+import Pieces.Rook;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,11 +19,15 @@ public class Board {
         this.initiateBoard();
     }
 
+    public int getNumOfRows() { return NUM_OF_ROWS; }
+
     public void initiateBoard() {
         for (int i = 0; i < NUM_OF_ROWS; i++) {
             this.board.add(new ArrayList<>(NUM_OF_ROWS));
             if (i == 0) {
-                this.board.get(i).addAll(Collections.nCopies(NUM_OF_ROWS, null)); // White pieces
+                this.board.get(i).add(new Rook(new Position(i, 0), PieceColor.WHITE));
+                this.board.get(i).addAll(Collections.nCopies(NUM_OF_ROWS - 2, null)); // White pieces
+                this.board.get(i).add(new Rook(new Position(i, NUM_OF_ROWS-1), PieceColor.WHITE));
             } else if (i == 1)
                 for (int j = 0; j < NUM_OF_ROWS; j++)
                     this.board.get(i).add(new Pawn(new Position(i, j), PieceColor.WHITE));
@@ -32,7 +37,9 @@ public class Board {
                 for (int j = 0; j < NUM_OF_ROWS; j++)
                     this.board.get(i).add(new Pawn(new Position(i, j), PieceColor.BLACK));
             } else {
+                this.board.get(i).add(new Rook(new Position(i, 0), PieceColor.BLACK));
                 this.board.get(i).addAll(Collections.nCopies(NUM_OF_ROWS, null)); // Black pieces
+                this.board.get(i).add(new Rook(new Position(i, NUM_OF_ROWS-1), PieceColor.BLACK));
             }
         }
     }
