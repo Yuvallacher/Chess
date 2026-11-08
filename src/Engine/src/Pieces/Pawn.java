@@ -57,10 +57,10 @@ public class Pawn extends AbstChessman {
         return (target_position_color != null && !target_position_color.equals(color));
     }
 
+    //TODO - duplicate code is baaaad
     @Override
-    public boolean[] move(Board board_obj, Position target) {
+    public boolean move(Board board_obj, Position target) {
         boolean valid_move = false;
-        boolean took_piece = false;
         List<List<Piece>> board = board_obj.getBoard();
 
         for (Position valid_position : this.valid_positions) {
@@ -69,13 +69,16 @@ public class Pawn extends AbstChessman {
                 Piece piece_at_target = board.get(target.getRow()).get(target.getColumn());
                 if (piece_at_target != null && !piece_at_target.isTaken() && target.getColumn() != this.getColumn()) {
                     piece_at_target.setAsTaken();
-                    took_piece = true;
+                    List<Piece> row = board.get(target.getRow());
+                    row.set(target.getColumn(), this);
+                    List<Piece> current_row = board.get(this.getRow());
+                    current_row.set(this.getColumn(), null);
                 }
                 this.position.updatePosition(target);
                 break;
             }
         }
-        return new boolean[] {valid_move, took_piece};
+        return valid_move;
     }
 
 

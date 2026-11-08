@@ -40,25 +40,26 @@ public abstract class AbstChessman implements Piece{
     }
 
     @Override
-    public boolean[] move(Board board_obj, Position target) {
+    public boolean move(Board board_obj, Position target) {
         List<List<Piece>> board = board_obj.getBoard();
         boolean valid_move = false;
-        boolean took_piece = false;
+
         for (Position valid_position : this.valid_positions) {
             if (valid_position.equals(target)) {
                 valid_move = true;
                 Piece piece_at_target = board.get(target.getRow()).get(target.getColumn());
                 if (piece_at_target != null && !piece_at_target.isTaken()) {
                     piece_at_target.setAsTaken();
-                    took_piece = true;
                     List<Piece> row = board.get(target.getRow());
                     row.set(target.getColumn(), this);
+                    List<Piece> current_row = board.get(this.getRow());
+                    current_row.set(this.getColumn(), null);
                 }
                 this.position.updatePosition(target);
                 break;
             }
         }
-        return new boolean[] {valid_move, took_piece};
+        return valid_move;
     }
 
     public boolean getIs_taken() { return is_taken; }
