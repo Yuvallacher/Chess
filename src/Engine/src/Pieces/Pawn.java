@@ -1,5 +1,6 @@
 package Pieces;
 
+import Board.Board;
 import Board.Position;
 
 import java.util.ArrayList;
@@ -13,12 +14,13 @@ public class Pawn extends AbstChessman {
     }
 
     @Override
-    public List<Position> getValidPositions(List<List<Piece>> board) {
+    public List<Position> getValidPositions(Board board_obj) {
         List<Position> valid_positions = new ArrayList<>(4);
         final int WHITE_START_ROW = 1;
         final int BLACK_START_ROW = 6;
         int current_row = this.getRow();
         int current_column = this.getColumn();
+        List<List<Piece>> board = board_obj.getBoard();
         PieceColor one_step_target_position_color = board.get(calculateDirectionPerColor(current_row, 1, color)).get(current_column).getColor();
 
         if ((color.equals(PieceColor.WHITE) && current_row == WHITE_START_ROW) || (color.equals(PieceColor.BLACK) && current_row == BLACK_START_ROW)) {
@@ -56,9 +58,11 @@ public class Pawn extends AbstChessman {
     }
 
     @Override
-    public boolean[] move(List<List<Piece>> board, Position target) {
+    public boolean[] move(Board board_obj, Position target) {
         boolean valid_move = false;
         boolean took_piece = false;
+        List<List<Piece>> board = board_obj.getBoard();
+
         for (Position valid_position : this.valid_positions) {
             if (valid_position.equals(target)) {
                 valid_move = true;

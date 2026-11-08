@@ -38,7 +38,7 @@ public class Board {
                     this.board.get(i).add(new Pawn(new Position(i, j), PieceColor.BLACK));
             } else {
                 this.board.get(i).add(new Rook(new Position(i, 0), PieceColor.BLACK));
-                this.board.get(i).addAll(Collections.nCopies(NUM_OF_ROWS, null)); // Black pieces
+                this.board.get(i).addAll(Collections.nCopies(NUM_OF_ROWS - 2, null)); // Black pieces
                 this.board.get(i).add(new Rook(new Position(i, NUM_OF_ROWS-1), PieceColor.BLACK));
             }
         }
@@ -68,4 +68,6 @@ public class Board {
         for (int i = 0; i < NUM_OF_ROWS; i++)
             System.out.printf("  " + "%-3s", (char) ('A' + i));
     }
+
+    public List<List<Piece>> getBoard() { return this.board; }
 }

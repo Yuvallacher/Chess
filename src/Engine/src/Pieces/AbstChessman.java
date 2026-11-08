@@ -1,5 +1,6 @@
 package Pieces;
 
+import Board.Board;
 import Board.Position;
 
 import java.util.ArrayList;
@@ -39,7 +40,8 @@ public abstract class AbstChessman implements Piece{
     }
 
     @Override
-    public boolean[] move(List<List<Piece>> board, Position target) {
+    public boolean[] move(Board board_obj, Position target) {
+        List<List<Piece>> board = board_obj.getBoard();
         boolean valid_move = false;
         boolean took_piece = false;
         for (Position valid_position : this.valid_positions) {
@@ -49,6 +51,8 @@ public abstract class AbstChessman implements Piece{
                 if (piece_at_target != null && !piece_at_target.isTaken()) {
                     piece_at_target.setAsTaken();
                     took_piece = true;
+                    List<Piece> row = board.get(target.getRow());
+                    row.set(target.getColumn(), this);
                 }
                 this.position.updatePosition(target);
                 break;
