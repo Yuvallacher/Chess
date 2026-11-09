@@ -15,31 +15,21 @@ public class Bishop extends AbstPiece {
     @Override
     public List<Position> getValidPositions(Board board_obj) {
         List<Position> valid_positions = new ArrayList<>();
-        boolean row_up = true;
-        boolean column_up = true;
+        int[][] directions = {
+                {1, 1},
+                {1, -1},
+                {-1, 1},
+                {-1, -1}
+        };
 
-        this.calculateValidPositions(row_up, column_up, board_obj);
-        this.calculateValidPositions(row_up, !column_up, board_obj);
-        this.calculateValidPositions(!row_up, column_up, board_obj);
-        this.calculateValidPositions(!row_up, !column_up, board_obj);
+        for (int[] direction : directions)
+            this.calculateValidPositions(direction[0], direction[1], board_obj, valid_positions);
 
+        this.valid_positions.clear();
+        this.valid_positions.addAll(valid_positions);
         return valid_positions;
     }
 
-    private void calculateValidPositions(boolean row_up, boolean column_up, Board board_obj) {
-        List<List<Piece>> board = board_obj.getBoard();
-        final int num_of_rows = board_obj.getNumOfRows();
-        int row = row_up ? this.getRow() + 1 : this.getRow() - 1;
-        int column = column_up ? this.getColumn() + 1 : this.getColumn() - 1;
-        boolean break_loop = false;
-        while (!break_loop) {
-            boolean added_position = addValidPosition(board, row, column, valid_positions);
-            row = row_up ? row + 1 : row - 1;
-            column = column_up ? column + 1 : column - 1;
-            if ((!added_position) || row < 0 || row >= num_of_rows || column < 0 || column >= num_of_rows)
-                break_loop = true;
-        }
-    }
 
     @Override
     public String toString() {
