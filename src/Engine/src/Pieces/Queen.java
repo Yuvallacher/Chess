@@ -31,4 +31,10 @@ public class Queen extends AbstPiece {
         this.valid_positions.addAll(valid_positions);
         return valid_positions;
     }
+
+
+    @Override
+    public String toString() {
+        return (this.color.equals(PieceColor.WHITE)? "♛" : "♕");
+    }
 }
