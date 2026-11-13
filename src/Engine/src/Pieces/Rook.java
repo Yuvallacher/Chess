@@ -22,6 +22,7 @@ public class Rook extends AbstPiece {
                 {0, 1},
                 {0, -1}
         };
+
         for (int[] direction : directions)
             this.calculateValidPositions(direction[0], direction[1], board_obj, valid_positions);
 

@@ -10,6 +10,7 @@ public class Bishop extends AbstPiece {
 
     public Bishop(Position position, PieceColor color) {
         super(position, color);
+        this.points_value = 3;
     }
 
     @Override
